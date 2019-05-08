@@ -6,5 +6,5 @@
 
 2.[Spring Boot核心](<https://github.com/Hikiy/SpringBootLearn/blob/master/notes/Spring%20Boot%E6%A0%B8%E5%BF%83.md>)
 
-3.[Web综合开发](<https://github.com/Hikiy/SpringBootLearn/blob/master/notes/Web%E7%BB%BC%E5%90%88%E5%BC%80%E5%8F%91.md>****)
+3.[Web综合开发](<https://github.com/Hikiy/SpringBootLearn/blob/master/notes/Web%E7%BB%BC%E5%90%88%E5%BC%80%E5%8F%91.md>)
 
