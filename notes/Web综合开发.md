@@ -1,57 +1,50 @@
 # Web综合开发
-### Json接口开发
+### Json
 在类添加@RestController方法即可，类中的方法默认返回Json  
 如果需要使用页面开发则使用@Controller
 
-### 自定义Filter
-我们常常在项目中会使用filters用于录调用日志、排除有XSS威胁的字符、执行权限验证等等。Spring Boot自动添加了OrderedCharacterEncodingFilter和HiddenHttpMethodFilter，并且我们可以自定义Filter。
+### Filter
+过滤器
 
 两个步骤：
-- 实现Filter接口，实现Filter方法
-- 添加@Configurationz 注解，将自定义Filter加入过滤链
+- 实现Filter接口
+- 添加@Component、@WebFilter注解，Filter自动加入过滤链
 
-上代码
+例子：
 ```
-@Configuration
-public class WebConfiguration {
-    @Bean
-    public RemoteIpFilter remoteIpFilter() {
-        return new RemoteIpFilter();
-    }    
-    @Bean
-    public FilterRegistrationBean testFilterRegistration() {
+@Component
+@WebFilter(urlPatterns = "/*",filterName = "baseFilter")
+public class BaseFilter implements Filter {
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
 
-        FilterRegistrationBean registration = new FilterRegistrationBean();
-        registration.setFilter(new MyFilter());
-        registration.addUrlPatterns("/*");
-        registration.addInitParameter("paramName", "paramValue");
-        registration.setName("MyFilter");
-        registration.setOrder(1);        return registration;
-    }    
-    
-    public class MyFilter implements Filter {
-        @Override
-        public void destroy() {           
-         // TODO Auto-generated method stub
-        }        
-         
-        @Override
-        public void doFilter(ServletRequest srequest, ServletResponse sresponse, FilterChain filterChain)
-                throws IOException, ServletException {            
-            // TODO Auto-generated method stub
-            HttpServletRequest request = (HttpServletRequest) srequest;
-            System.out.println("this is MyFilter,url :"+request.getRequestURI());
-            filterChain.doFilter(srequest, sresponse);
-        }        
-        @Override
-        public void init(FilterConfig arg0) throws ServletException {
-           // TODO Auto-generated method stub
-        }
+    }
+
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        HttpServletRequest arequest = (HttpServletRequest) request;
+        System.out.println("Filter success!url is :"+arequest.getRequestURI());
+        chain.doFilter(request, response);
+    }
+
+    @Override
+    public void destroy() {
+
     }
 }
 ```
 
-### 自定义Property
+访问`http://localhost:9090/authorsetting`发现控制台输出了两句：
+
+```
+this is MyFilter,url :/authorsetting
+this is MyFilter,url :/favicon.ico
+```
+
+第二个是浏览器标签显示的图标
+
+### Property
+
 配置在application.properties中
 ```
 com.hiki.title=hiki
@@ -67,7 +60,7 @@ com.hiki.description=px
     //省略getter settet方法
     }
 ```
-**log配置**  
+**log配置** 
 配置输出的地址和输出级别  
 ```
 logging.path=/user/local/log
@@ -80,7 +73,8 @@ path为本机的log地址，logging.level 后面可以根据包路径配置不�
 ### 数据库操作
 jpa是利用Hibernate生成各种自动化的sql，如果只是简单的增删改查，基本上不用手写了，spring内部已经帮大家封装实现了。
 
-**如何在spring boot中使用**
+**使用步骤**
+
 - 1.添加相jar包
 ```
     <dependency>
@@ -176,7 +170,7 @@ Thymeleaf: <p th:text="${message}">Hello World!</p>
 ```
 注意，由于Thymeleaf使用了XML DOM解析器，因此它并不适合于处理大规模的XML文件。
 
-**WebJars**
+### WebJars
 WebJars是一个很神奇的东西，可以让大家以jar包的形式来使用前端的各种框架、组件。
 
 **什么是WebJars**
