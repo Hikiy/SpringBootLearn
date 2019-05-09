@@ -12,7 +12,8 @@
 
 上代码
 ```
-@Configurationpublic class WebConfiguration {
+@Configuration
+public class WebConfiguration {
     @Bean
     public RemoteIpFilter remoteIpFilter() {
         return new RemoteIpFilter();
