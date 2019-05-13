@@ -1,24 +1,29 @@
 package com.hiki.springbootlearn.entity;
 
-import org.hibernate.annotations.Entity;
-import org.springframework.data.annotation.Id;
-
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.io.Serializable;
 
-@Entity
-public class User implements Serializable {
+@Entity//javax.persistence.Entity;
+public class Users implements Serializable {
     private static final long serialVersionUID = 7945207204170209646L;
 
+    @Id
+    @GeneratedValue
     private Long id;
     private String name;
     private String password;
     private Long age;
 
-    public User(String name, String password, Long age){
+    public Users(String name, String password, Long age){
         this.name = name;
         this.password = password;
         this.age = age;
+    }
+
+    public Users(){
+
     }
 
     public Long getId() {
