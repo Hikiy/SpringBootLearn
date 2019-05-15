@@ -1,6 +1,7 @@
 package com.hiki.springbootlearn;
 
 import com.hiki.springbootlearn.entity.AuthorSettings;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @SpringBootApplication
+@MapperScan("com.hiki.springbootlearn.mapper")
 public class SpringbootlearnApplication {
 //    @Value("${learn.author}")
 //    private String learnAuthor;
