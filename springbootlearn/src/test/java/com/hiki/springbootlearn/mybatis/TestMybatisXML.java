@@ -18,7 +18,7 @@ public class TestMybatisXML {
     private UsersMapper usersMapper;
 
     @Test
-    @Ignore
+    //@Ignore
     public void testMybatis1(){
         List<Users> users = usersMapper.getAll();
         for (Users user:users) {

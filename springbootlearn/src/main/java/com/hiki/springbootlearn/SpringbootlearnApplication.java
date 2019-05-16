@@ -6,13 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
 @SpringBootApplication
 //@MapperScan("com.hiki.springbootlearn.mapper")
-@MapperScan("com.hiki.springbootlearn.mybatis.mapper")
+//@MapperScan("com.hiki.springbootlearn.mybatis.mapper")
 public class SpringbootlearnApplication {
 //    @Value("${learn.author}")
 //    private String learnAuthor;
