@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @SpringBootApplication
-@MapperScan("com.hiki.springbootlearn.mapper")
+//@MapperScan("com.hiki.springbootlearn.mapper")
+@MapperScan("com.hiki.springbootlearn.mybatis.mapper")
 public class SpringbootlearnApplication {
 //    @Value("${learn.author}")
 //    private String learnAuthor;
