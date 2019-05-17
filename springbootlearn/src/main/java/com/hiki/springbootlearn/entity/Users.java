@@ -25,6 +25,10 @@ public class Users implements Serializable {
     public Users(){
 
     }
+    @Override
+    public String toString(){
+        return "User::  id:"+ this.name + " name:" + this.name + "age:" + this.age + " password:" + this.password;
+    }
 
     public Long getId() {
         return id;

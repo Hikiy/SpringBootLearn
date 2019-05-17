@@ -14,4 +14,14 @@ public class RabbitMQConfig {
         //org.springframework.amqp.core.Queue;
         return new Queue("hello");
     }
+
+    @Bean
+    public Queue Queue2(){
+        return new Queue("hello2");
+    }
+
+    @Bean
+    public Queue Queue3(){
+        return new Queue("object");
+    }
 }
