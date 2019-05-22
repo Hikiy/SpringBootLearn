@@ -1,9 +1,6 @@
 package com.hiki.springbootlearn.RabbitMQ;
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -28,7 +25,9 @@ public class RabbitMQConfig {
         return new Queue("object");
     }
 
+
     //Topic Exchange
+
     @Bean
     public Queue queueMessage(){
         return new Queue("topic.message");
@@ -56,5 +55,38 @@ public class RabbitMQConfig {
     @Bean
     public Binding bindingExchangeAll(Queue queueAll,TopicExchange exchange){
         return BindingBuilder.bind(queueAll).to(exchange).with("topickey.#");
+    }
+
+
+    //Fanout Exchange
+
+    @Bean
+    public Queue Message1() {
+        return new Queue("fanout.1");
+    }
+    @Bean
+    public Queue Message2() {
+        return new Queue("fanout.2");
+    }
+    @Bean
+    public Queue Message3() {
+        return new Queue("fanout.3");
+    }
+
+    @Bean
+    FanoutExchange fanoutExchange() {
+        return new FanoutExchange("fanoutExchange");
+    }
+    @Bean
+    Binding bindingExchangeA(Queue Message1,FanoutExchange fanoutExchange) {
+        return BindingBuilder.bind(Message1).to(fanoutExchange);
+    }
+    @Bean
+    Binding bindingExchangeB(Queue Message2, FanoutExchange fanoutExchange) {
+        return BindingBuilder.bind(Message2).to(fanoutExchange);
+    }
+    @Bean
+    Binding bindingExchangeC(Queue Message3, FanoutExchange fanoutExchange) {
+        return BindingBuilder.bind(Message3).to(fanoutExchange);
     }
 }

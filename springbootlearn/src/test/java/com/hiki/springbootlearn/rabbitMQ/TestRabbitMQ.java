@@ -1,9 +1,6 @@
 package com.hiki.springbootlearn.rabbitMQ;
 
-import com.hiki.springbootlearn.RabbitMQ.sender.TestSender;
-import com.hiki.springbootlearn.RabbitMQ.sender.TestSender2;
-import com.hiki.springbootlearn.RabbitMQ.sender.TestSender3;
-import com.hiki.springbootlearn.RabbitMQ.sender.TopicSender;
+import com.hiki.springbootlearn.RabbitMQ.sender.*;
 import com.hiki.springbootlearn.entity.Users;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -23,6 +20,8 @@ public class TestRabbitMQ {
     private TestSender3 ts3;
     @Autowired
     private TopicSender topics;
+    @Autowired
+    private FanoutSender fs;
 
     @Test
     @Ignore
@@ -63,9 +62,16 @@ public class TestRabbitMQ {
     }
 
     @Test
+    @Ignore
     //测试Topic Exchange
     public void testTopic() throws Exception{
         topics.send1("发给message的信息，但是all也能拿到，所以两个Receiver都拿到了");
         topics.send2("发给all的，所以只有一个Receiver拿到了");
+    }
+
+    @Test
+    //测试Fanout Exchange
+    public void testFanout() throws Exception{
+        fs.send("hiki来啦");
     }
 }
