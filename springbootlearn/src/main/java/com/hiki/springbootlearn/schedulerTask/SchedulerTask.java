@@ -17,6 +17,7 @@ public class SchedulerTask {
     //@Scheduled(fixedRate = 5000) ：上一次开始执行时间点之后5秒再执行
     //@Scheduled(fixedDelay = 5000) ：上一次执行完毕时间点之后5秒再执行
     //@Scheduled(initialDelay=1000, fixedRate=5000) ：第一次延迟1秒后执行，之后按 fixedRate 的规则每5秒执行一
+    //@Scheduled(cron="*/5 * * * * ?") 这个是常用的模式，Cron表达式
     private void time(){
         System.out.println("现在时间：" + dataFomat.format(new Date()));
     }
