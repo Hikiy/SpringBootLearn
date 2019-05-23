@@ -78,4 +78,25 @@ public class MailUtil {
             logger.error("发送附件邮件时发生异常！", e);
         }
     }
+
+    //发送有静态资源的文件
+    public void sendInlineResourceMail(String to, String subject, String content, String rscPath, String rscId){
+        MimeMessage message = javaMailSender.createMimeMessage();
+
+        try {
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+            helper.setFrom(from);
+            helper.setTo(to);
+            helper.setSubject(subject);
+            helper.setText(content, true);
+
+            FileSystemResource res = new FileSystemResource(new File(rscPath));
+            helper.addInline(rscId, res);
+
+            javaMailSender.send(message);
+            logger.info("含静态资源的邮件已经发送。");
+        } catch (Exception e) {
+            logger.error("发送含静态资源的邮件时发生异常！", e);
+        }
+    }
 }
