@@ -2,6 +2,7 @@ package com.hiki.springbootlearn.mongodb;
 
 import com.hiki.springbootlearn.dao.UserMongoDao;
 import com.hiki.springbootlearn.entity.Users;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,12 +27,14 @@ public class TestMongodb {
         umd.saveUser(user);
     }
     @Test
-    @Ignore
+    //@Ignore
     public void testFindById()throws Exception{
         Users user = umd.findUserById(1L);
         System.out.println(user.getName());
         System.out.println(user.getPassword());
         System.out.println(user.getAge());
+        Assert.assertTrue("后面的判断错了就打印这句话", user.getName().equals("newHiki"));
+        Assert.assertFalse("后面的判断对了就打印这句话", user.getName().equals("newHiki"));
     }
 
     @Test
